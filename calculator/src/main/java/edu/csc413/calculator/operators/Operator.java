@@ -2,6 +2,9 @@ package edu.csc413.calculator.operators;
 
 import edu.csc413.calculator.evaluator.Operand;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class Operator {
     // The Operator class should contain an instance of a HashMap
     // This map will use keys as the tokens we're interested in,
@@ -13,6 +16,21 @@ public abstract class Operator {
     // HashMap operators = new HashMap();
     // operators.put( "+", new AdditionOperator() );
     // operators.put( "-", new SubtractionOperator() );
+
+    private static Map<String, Operator> operators;
+
+    static {
+        operators = new HashMap<>();
+        operators.put("+", new AddOperator());
+        operators.put("-", new SubtractOperator());
+        operators.put("*", new MultiplyOperator());
+        operators.put("/", new DivideOperator());
+        operators.put("^", new PowerOperator());
+        operators.put("(", new ParenthesesOperator());
+        operators.put(")", new ParenthesesOperator());
+    }
+
+
 
     /**
      * retrieve the priority of an Operator
@@ -35,18 +53,23 @@ public abstract class Operator {
      * Think about what happens if we add more operators.
      */
     public static Operator getOperator(String token) {
-        return null;
+        return operators.get(token);
     }
 
     /**
      * used to retrieve an operator from our HashMap.
-     * This will act as out publicly facing function,
+     * This will act as our publicly facing function,
      * granting access to the Operator HashMap.
      *
      * @param token key of the operator we want to retrieve
      * @return reference to a Operator instance.
      */
     public static boolean check(String token) {
-        return false;
+        try {
+            getOperator(token);
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
     }
 }
