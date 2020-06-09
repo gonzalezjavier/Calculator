@@ -6,6 +6,7 @@ public class DivideOperator extends Operator {
 
     @Override
     public int priority(){
+
         return 2;
     }
 

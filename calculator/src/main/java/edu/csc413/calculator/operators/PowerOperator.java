@@ -6,7 +6,6 @@ public class PowerOperator extends Operator {
 
     @Override
     public int priority(){
-
         return 3;
     }
     @Override
