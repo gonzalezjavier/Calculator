@@ -94,18 +94,18 @@ public class Evaluator {
     // that is, we should keep evaluating the operator stack until it is empty;
     // Suggestion: create a method that processes the operator stack until empty.
 
-    while (!operatorStack.isEmpty()) {
+    while (!operatorStack.isEmpty() && operandStack.size()>=2) {
       process();
     }
-
     return operandStack.pop().getValue();
   }
 
   private void process() {
-        Operand operandOne = operandStack.pop();
-        Operand operandTwo = operandStack.pop();
-        Operator operator = operatorStack.pop();
-        operandStack.push(operator.execute(operandTwo, operandOne));
+    Operand operandOne = operandStack.pop();
+    Operand operandTwo = operandStack.pop();
+    Operator operator = operatorStack.pop();
+    operandStack.push(operator.execute(operandTwo, operandOne));
+
   }
 
 }

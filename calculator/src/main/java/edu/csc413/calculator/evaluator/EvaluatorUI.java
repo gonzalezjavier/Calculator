@@ -1,5 +1,8 @@
 package edu.csc413.calculator.evaluator;
 
+import edu.csc413.calculator.exceptions.InvalidTokenException;
+import edu.csc413.calculator.operators.Operator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +17,7 @@ public class EvaluatorUI extends JFrame implements ActionListener {
     // numbered from left to right, top to bottom
     // bText[] array contains the text for corresponding buttons
     private static final String[] buttonText = {
-        "7", "8", "9", "+", "4", "5", "6", "- ", "1", "2", "3",
+        "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3",
         "*", "0", "^", "=", "/", "(", ")", "C", "CE"
     };
 
@@ -35,6 +38,8 @@ public class EvaluatorUI extends JFrame implements ActionListener {
 
         add(expressionTextField, BorderLayout.NORTH);
         expressionTextField.setEditable(false);
+
+        expressionTextField.setBackground(Color.white); //this was added
 
         add(buttonPanel, BorderLayout.CENTER);
         buttonPanel.setLayout(new GridLayout(5, 4));
@@ -71,6 +76,58 @@ public class EvaluatorUI extends JFrame implements ActionListener {
      *                    button is pressed.
      */
     public void actionPerformed(ActionEvent actionEventObject) {
+        String buttonPressed = actionEventObject.getActionCommand();
+        String oldText = expressionTextField.getText();
+
+        if ("0".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("1".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("2".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("3".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("4".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("5".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("6".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("7".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("8".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("9".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("+".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("-".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("*".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("/".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("^".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("(".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if (")".equals(buttonPressed)) {
+            this.expressionTextField.setText(oldText+buttonPressed);
+        } else if ("C".equals(buttonPressed)) {
+            this.expressionTextField.setText("");
+        } else if ("CE".equals(buttonPressed)) {
+            if (oldText.length()>=1) {
+                this.expressionTextField.setText(oldText.substring(0, oldText.length() - 1));
+            }
+        } else if ("=".equals(buttonPressed)) {
+            try {
+                int result = new Evaluator().evaluateExpression(oldText);
+                this.expressionTextField.setText(String.valueOf(result));
+            } catch (InvalidTokenException e) {
+            }
+        }
+
+
 
 
     }
